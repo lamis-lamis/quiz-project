@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive QCM App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question h3 {
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #e0f7fa;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive QCM App</h1>
+    <form id="quiz-form">
+        <!-- Example Question -->
+        <div class="question">
+            <h3>1. Le névraxe est représenté par :</h3>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> a. La partie périphérique du système cérébro-spinal</label>
+                <label><input type="radio" name="q1" value="b"> b. Le système sympathique</label>
+                <label><input type="radio" name="q1" value="c"> c. Le système nerveux organo-végétatif</label>
+                <label><input type="radio" name="q1" value="d"> d. Le système parasympathique</label>
+                <label><input type="radio" name="q1" value="e"> e. La partie centrale du système cérébro-spinal</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>2. Les axes et les plans anatomiques, indiquez la proposition juste :</h3>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> a. Le plan frontal divise le corps en 2 sections latérales</label>
+                <label><input type="radio" name="q2" value="b"> b. Le plan sagittal divise le corps en 2 parties antérieure et postérieure</label>
+                <label><input type="radio" name="q2" value="c"> c. L'axe sagittal traverse perpendiculairement le plan transverse</label>
+                <label><input type="radio" name="q2" value="d"> d. L’axe frontal coupe perpendiculairement le plan sagittal</label>
+                <label><input type="radio" name="q2" value="e"> e. L'axe longitudinal traverse perpendiculairement le plan frontal</label>
+            </div>
+        </div>
+
+        <!-- Add more questions as needed -->
+
+        <button type="button" class="btn" onclick="calculateResult()">Submit</button>
+    </form>
+
+    <div id="result" class="result" style="display: none;"></div>
+
+    <script>
+        // Correct answers
+        const correctAnswers = {
+            q1: 'e',
+            q2: 'e'
+        };
+
+        function calculateResult() {
+            const form = document.getElementById('quiz-form');
+            const resultDiv = document.getElementById('result');
+            let score = 0;
+            let totalQuestions = 0;
+
+            for (const [key, value] of Object.entries(correctAnswers)) {
+                totalQuestions++;
+                const selectedOption = form.elements[key].value;
+                if (selectedOption === value) {
+                    score++;
+                }
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `You scored ${score} out of ${totalQuestions}!`;
+        }
+    </script>
+</body>
+</html>
